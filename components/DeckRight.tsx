@@ -32,7 +32,7 @@ export function DeckRight({ audioEngine, track, onTrackLoad }: DeckRightProps) {
 
   const updateTime = useCallback(() => {
     if (isPlaying) {
-      setCurrentTime(deck.savedOffset + (audioEngine.context.currentTime - deck.playStartTime));
+      setCurrentTime(deck.savedOffset + (audioEngine.getCurrentTime() - deck.playStartTime));
       timeUpdateRef.current = requestAnimationFrame(updateTime);
     }
   }, [isPlaying, deck, audioEngine]);
