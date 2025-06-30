@@ -1,11 +1,11 @@
 export class AudioEngine {
   private context: AudioContext;
-  private masterGain: GainNode;
-  private cueGain: GainNode;
+  private masterGain!: GainNode;
+  private cueGain!: GainNode;
   private leftDeck: DeckAudio;
   private rightDeck: DeckAudio;
-  private crossfader: GainNode;
-  private analyzer: AnalyserNode;
+  private crossfader!: GainNode;
+  private analyzer!: AnalyserNode;
   
   constructor() {
     this.context = new AudioContext();
@@ -54,6 +54,10 @@ export class AudioEngine {
     return data;
   }
 
+  getCurrentTime(): number {
+    return this.context.currentTime;
+  }
+
   setCrossfader(value: number) {
     // -1 = full left, 0 = center, 1 = full right
     const leftGain = Math.cos((value + 1) * Math.PI / 4);
@@ -84,12 +88,12 @@ class DeckAudio {
   private buffer: AudioBuffer | null = null;
   private source: AudioBufferSourceNode | null = null;
   private cueSource: AudioBufferSourceNode | null = null;
-  private gainNode: GainNode;
-  private cueGainNode: GainNode;
-  private crossfaderGain: GainNode;
-  private eqLow: BiquadFilterNode;
-  private eqMid: BiquadFilterNode;
-  private eqHigh: BiquadFilterNode;
+  private gainNode!: GainNode;
+  private cueGainNode!: GainNode;
+  private crossfaderGain!: GainNode;
+  private eqLow!: BiquadFilterNode;
+  private eqMid!: BiquadFilterNode;
+  private eqHigh!: BiquadFilterNode;
   
   // State
   public bpm: number = 120;
